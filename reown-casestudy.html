@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reown — UX/UI Design Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0A0A0A;
+    --dark: #111111;
+    --card: #1A1A1A;
+    --card2: #222222;
+    --border: #2A2A2A;
+    --border2: #333333;
+    --re-red: #CC2B2B;
+    --re-red2: #E03535;
+    --re-gold: #C49A3C;
+    --re-gold2: #D4AA4C;
+    --text: #E8E4DC;
+    --muted: #888880;
+    --muted2: #AAAAAA;
+    --white: #F5F0E8;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: var(--display); font-size: 1.4rem; letter-spacing: 0.08em; color: var(--white); display: flex; align-items: center; padding: 0; margin: 0; line-height: 1; }
+  .nav-logo span { color: var(--re-red); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-tag { font-family: var(--mono); font-size: 0.72rem; color: var(--re-red); border: 1px solid var(--re-red); padding: 4px 10px; border-radius: 3px; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: end;
+  }
+  .hero-left { display: flex; flex-direction: column; }
+  .hero-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-height: 460px;
+  }
+  .hero-mockups {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    filter: drop-shadow(0 24px 60px rgba(0,0,0,0.6));
+  }
+  .hero-mockups img {
+    width: 100%;
+    display: block;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 40%, rgba(204,43,43,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(196,154,60,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: var(--mono); font-size: 0.72rem;
+    color: var(--re-red); letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--re-red); }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    position: relative; z-index: 1;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title .accent { color: var(--re-red); }
+  .hero-sub {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--muted); font-weight: 300;
+    max-width: 480px;
+    margin-bottom: 3rem;
+    position: relative; z-index: 1;
+  }
+  .hero-meta {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta-label { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+  .hero-meta-val { font-size: 0.9rem; color: var(--white); font-weight: 500; }
+  @media(max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-right {
+      min-height: unset;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding-top: 1rem;
+    }
+    .hero-mockups img { width: 100%; height: auto; }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+  @media(max-width: 800px) {
+    section { padding: 4rem 1.25rem; }
+  }
+  .section-label {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--re-red); letter-spacing: 0.16em; text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--re-red); }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--white);
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .section-body { color: var(--muted2); font-weight: 300; max-width: 680px; line-height: 1.8; }
+
+  /* Divider */
+  .divider { border: none; border-top: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* ── OVERVIEW CARDS ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+  .overview-card {
+    background: var(--card);
+    padding: 2rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: background 0.2s;
+  }
+  .overview-card:hover { background: var(--card2); }
+  .overview-card-num {
+    font-family: var(--display); font-size: 3rem;
+    color: var(--re-red); line-height: 1;
+  }
+  .overview-card-title { font-size: 0.85rem; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 0.08em; }
+  .overview-card-body { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── PROBLEM CARDS ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .problem-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .problem-card:hover { border-color: var(--re-red); transform: translateY(-2px); }
+  .problem-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--re-red);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .problem-card:hover::before { transform: scaleX(1); }
+  .problem-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .problem-title { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .problem-body { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── USER FLOW ── */
+  .flow-wrap { margin-top: 3rem; }
+  .flow-tabs {
+    display: flex; gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .flow-tab {
+    padding: 10px 28px;
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; border: none; background: var(--card);
+    color: var(--muted); transition: all 0.2s;
+    border-right: 1px solid var(--border);
+  }
+  .flow-tab:last-child { border-right: none; }
+  .flow-tab.active { background: var(--re-red); color: var(--white); }
+  .flow-tab:hover:not(.active) { background: var(--card2); color: var(--text); }
+
+  .flow-panel { display: none; }
+  .flow-panel.active { display: block; }
+
+  /* ── FLOW NODES ── */
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .flow-node {
+    flex: 1;
+    min-width: 110px;
+    background: #1A1A1A;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 12px 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .flow-node.highlight { background: var(--re-red); border-color: var(--re-red); }
+  .flow-node.gold { background: #1A1A1A; border-color: var(--re-gold); }
+  .flow-node-sub { font-size: 0.65rem; color: #888; }
+  .flow-node.highlight .flow-node-sub { color: rgba(255,255,255,0.65); }
+  .flow-node.gold .flow-node-sub { color: var(--re-gold); }
+  .flow-node-title { font-size: 0.75rem; font-weight: 700; color: #E8E4DC; text-transform: uppercase; letter-spacing: 0.06em; }
+  .flow-node.highlight .flow-node-title { color: #fff; }
+  .flow-node-desc { font-size: 0.6rem; color: #555; }
+  .flow-node.highlight .flow-node-desc { color: rgba(255,255,255,0.5); }
+  .flow-arrow {
+    flex-shrink: 0;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--re-red);
+    font-size: 1rem;
+  }
+
+  /* ── MOCKUP ── */
+  .mockup-wrap {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  @media(max-width:700px) { .mockup-wrap { grid-template-columns: 1fr; } }
+  .mockup-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .mockup-feature {
+    border-left: 2px solid var(--border);
+    padding-left: 1.25rem;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+  .mockup-feature:hover { border-color: var(--re-red); }
+  .mockup-feature-title { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.3rem; }
+  .mockup-feature-body { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+  .buy-mockup-grid {
+    display: grid;
+    grid-template-columns: 0.45fr 1fr;
+    gap: 0.25rem;
+    align-items: stretch;
+    justify-content: start;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  .buy-mockup-frame {
+    height: 760px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: transparent;
+  }
+  .buy-mockup-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  @media(max-width: 800px) {
+    .buy-mockup-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .buy-mockup-frame {
+      height: auto;
+      border-radius: 10px;
+    }
+    .buy-mockup-frame img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: top center;
+    }
+  }
+
+  /* phone mockup */
+  .phone-frame {
+    background: #111;
+    border: 2px solid #333;
+    border-radius: 36px;
+    overflow: hidden;
+    max-width: 320px;
+    margin: 0 auto;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .phone-notch {
+    background: #0A0A0A;
+    height: 28px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    width: 110px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+  }
+
+  /* ── METRICS ── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+  .metric-card:hover { border-color: var(--re-gold); }
+  .metric-num {
+    font-family: var(--display);
+    font-size: 3rem; line-height: 1;
+    color: var(--re-gold);
+    margin-bottom: 0.5rem;
+  }
+  .metric-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  @media(min-width: 900px) {
+    .metrics-grid {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .metric-card { padding: 1.75rem 1rem; }
+  }
+
+  /* ── PERSONA ── */
+  .persona-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media(max-width:600px) { .persona-card { grid-template-columns: 1fr; } }
+  .persona-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--card2);
+    border: 2px solid var(--re-red);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+  .persona-name { font-family: var(--display); font-size: 2rem; color: var(--white); margin-bottom: 0.25rem; }
+  .persona-role { font-family: var(--mono); font-size: 0.72rem; color: var(--re-red); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.25rem; }
+  .persona-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem; }
+  .tag {
+    font-family: var(--mono); font-size: 0.68rem;
+    padding: 4px 10px; border-radius: 3px;
+    border: 1px solid var(--border2); color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .tag.red { border-color: rgba(204,43,43,0.4); color: var(--re-red); }
+  .tag.gold { border-color: rgba(196,154,60,0.4); color: var(--re-gold); }
+  .persona-quote {
+    font-size: 0.95rem; color: var(--muted2);
+    border-left: 2px solid var(--re-red);
+    padding-left: 1rem; line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* ── SOLUTION CARDS ── */
+  .solution-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+  .solution-item {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.75rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .solution-item:hover { border-color: var(--re-red); background: var(--card2); }
+  .solution-num {
+    font-family: var(--display); font-size: 2rem; color: var(--border2);
+    line-height: 1;
+  }
+  .solution-content h4 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .solution-content p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+  .priority-badge {
+    display: inline-block;
+    font-family: var(--mono); font-size: 0.64rem;
+    padding: 2px 8px; border-radius: 2px; margin-top: 0.5rem;
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .prio-high { background: rgba(204,43,43,0.15); color: var(--re-red); border: 1px solid rgba(204,43,43,0.3); }
+  .prio-med { background: rgba(196,154,60,0.12); color: var(--re-gold); border: 1px solid rgba(196,154,60,0.25); }
+  .prio-low { background: rgba(80,80,80,0.15); color: var(--muted); border: 1px solid var(--border); }
+
+  /* ── REFLECTION ── */
+  .reflection-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+  @media(max-width:600px) { .reflection-grid { grid-template-columns: 1fr; } }
+  .reflection-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+  }
+  .reflection-card h4 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--re-red); margin-bottom: 1rem; }
+  .reflection-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .reflection-card li { font-size: 0.85rem; color: var(--muted); line-height: 1.55; display: flex; gap: 0.6rem; }
+  .reflection-card li::before { content: '→'; color: var(--re-red); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .footer-logo { font-family: var(--display); font-size: 2.5rem; color: var(--white); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .footer-logo span { color: var(--re-red); }
+  .footer-sub { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; }
+  .footer-line { width: 40px; height: 1px; background: var(--border); margin: 1.5rem auto; }
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+  .footer-copy span { color: var(--re-gold); }
+
+  /* ── SCROLL FADE IN ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE NAV ── */
+  @media(max-width:600px) {
+    .nav-links { display: none; }
+    .hero-title { font-size: 4rem; }
+    .hero-meta { gap: 1.5rem; }
+  }
+
+  /* ─── SECTION SEPARATOR ─── */
+  .full-sep {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ─── QUOTE BLOCK ─── */
+  .quote-block {
+    border-left: 3px solid var(--re-gold);
+    padding: 1.25rem 1.75rem;
+    background: var(--card);
+    border-radius: 0 8px 8px 0;
+    margin: 2rem 0;
+    font-size: 1.05rem;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  /* process steps */
+  .steps { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+  .step {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 1.5rem; align-items: start;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--re-red);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .step h4 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="/reown_logo.webp" alt="Reown" style="height:22px; width:auto; object-fit:contain;">
+    </div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#problem">Problem</a>
+      <a href="#persona">Persona</a>
+      <a href="#flows">User Flow</a>
+      <a href="#mockups">Mockups</a>
+      <a href="#metrics">Metrics</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-inner">
+    <!-- LEFT: Text Content -->
+    <div class="hero-left">
+      <div class="hero-tag">UX / UI Design Case Study</div>
+      <h1 class="hero-title">RE<span class="accent">OWN</span></h1>
+      <p class="hero-sub">Designing the trusted marketplace for pre-owned Royal Enfield motorcycles — a platform where legacy bikes find new roads and new riders.</p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Product</span>
+          <span class="hero-meta-val">Royal Enfield Reown</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Category</span>
+          <span class="hero-meta-val">Automobile / Marketplace</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">My Role</span>
+          <span class="hero-meta-val">UX / UI Designer</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Platforms</span>
+          <span class="hero-meta-val">Web + Mobile (Responsive)</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Pages Designed</span>
+          <span class="hero-meta-val">Buy PLP · Sell Page</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Device Mockups -->
+    <div class="hero-right">
+      <div class="hero-mockups">
+        <img src="/reown_mockups.png" alt="Reown platform on mobile and laptop">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-sep"></div>
+
+<!-- OVERVIEW -->
+<section id="overview" class="fade-in">
+  <div class="section-label">01 — Overview</div>
+  <h2 class="section-title">WHAT IS REOWN?</h2>
+  <p class="section-body">
+    Reown is Royal Enfield's official certified pre-owned motorcycle platform. It bridges the trust gap in India's fragmented used two-wheeler market — offering buyers 200+ point inspected bikes, and sellers a fair, doorstep-evaluation experience with 24-hour payment. As the UX/UI designer on the project, I owned the Buy listing page and the Sell page — both for web and mobile responsive.
+  </p>
+
+  <div class="overview-grid">
+    <div class="overview-card">
+      <div class="overview-card-num">200+</div>
+      <div class="overview-card-title">Point Checklist</div>
+      <div class="overview-card-body">Every bike inspected on 200+ quality parameters before listing on the platform.</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-num">24H</div>
+      <div class="overview-card-title">Payment Transfer</div>
+      <div class="overview-card-body">Sellers receive payment within 24 hours of accepting the quote — no waiting.</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-num">7</div>
+      <div class="overview-card-title">Day Returns</div>
+      <div class="overview-card-body">Buyers can return any purchase within 7 days, no questions asked.</div>
+    </div>
+    <div class="overview-card">
+      <div class="overview-card-num">2</div>
+      <div class="overview-card-title">Core Flows</div>
+      <div class="overview-card-body">Two distinct journeys — Buy (PLP + Test Ride) and Sell (Estimate + Evaluation) — each with unique UX needs.</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- PROBLEM -->
+<section id="problem" class="fade-in">
+  <div class="section-label">02 — The Problem</div>
+  <h2 class="section-title">THE PAIN POINTS</h2>
+  <p class="section-body">India's pre-owned motorcycle market is massive but deeply broken. Buyers distrust quality; sellers distrust pricing. Brokers exploit both sides. Reown had to solve this — while maintaining the premium Royal Enfield brand identity.</p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-icon">🔍</div>
+      <div class="problem-title">Discovery Chaos</div>
+      <div class="problem-body">Buyers had no reliable way to find certified pre-owned Royal Enfields in their city. OLX and Facebook listings offered zero quality guarantee.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">💸</div>
+      <div class="problem-title">Pricing Opacity</div>
+      <div class="problem-body">Sellers never knew if they were getting a fair deal. Broker margins ate into value. No transparent, market-backed pricing existed.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📋</div>
+      <div class="problem-title">Documentation Dread</div>
+      <div class="problem-body">RC transfers, insurance, NOC — the paperwork involved in buying/selling a motorcycle scared off large segments of potential users.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🤝</div>
+      <div class="problem-title">Zero Brand Trust</div>
+      <div class="problem-body">The used market had no official Royal Enfield presence. Buyers worried about tampered odometers, accident history, and fake certifications.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📍</div>
+      <div class="problem-title">Geographic Friction</div>
+      <div class="problem-body">Sellers needed to physically take bikes to evaluation centres. Buyers had to travel to view bikes. Convenience was near zero.</div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">📱</div>
+      <div class="problem-title">No Mobile Experience</div>
+      <div class="problem-body">The target user — 25–38 yr old RE enthusiast — lives on mobile. A desktop-only or poorly adapted experience would kill conversion.</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- PERSONA -->
+<section id="persona" class="fade-in">
+  <div class="section-label">03 — User Persona</div>
+  <h2 class="section-title">WHO WE DESIGNED FOR</h2>
+  <p class="section-body">We identified two primary personas across the Buy and Sell flows. For each, we mapped goals, frustrations, and context of use to drive design decisions.</p>
+
+  <!-- Buyer Persona -->
+  <div class="persona-card">
+    <div class="persona-avatar">🏍</div>
+    <div>
+      <div class="persona-name">ARJUN MEHTA</div>
+      <div class="persona-role">The Aspiring Buyer · Primary Persona</div>
+      <div class="persona-tags">
+        <span class="tag">Age 26–34</span>
+        <span class="tag">Urban</span>
+        <span class="tag">Salaried</span>
+        <span class="tag red">Budget ₹1–2.5L</span>
+        <span class="tag gold">RE Enthusiast</span>
+        <span class="tag">Mobile-first</span>
+      </div>
+      <p class="persona-quote">"I've always wanted a Bullet or Classic 350. A new one is out of budget but I don't want to get cheated buying from some random guy on OLX. I need to know this bike is actually in good shape."</p>
+
+      <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+        <div>
+          <div style="font-size: 0.72rem; font-family: 'DM Mono'; color: var(--re-red); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem;">Goals</div>
+          <ul style="list-style: none; font-size: 0.83rem; color: var(--muted); line-height: 1.8;">
+            <li>→ Find a certified, quality bike in his city</li>
+            <li>→ Compare models and prices easily</li>
+            <li>→ Test ride before committing</li>
+            <li>→ Simple paperwork and doorstep delivery</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: 0.72rem; font-family: 'DM Mono'; color: var(--re-red); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem;">Frustrations</div>
+          <ul style="list-style: none; font-size: 0.83rem; color: var(--muted); line-height: 1.8;">
+            <li>→ Can't trust listing descriptions online</li>
+            <li>→ Filters on other platforms are useless</li>
+            <li>→ Sellers are unresponsive or aggressive</li>
+            <li>→ No clarity on what paperwork is needed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seller Persona -->
+  <div class="persona-card" style="margin-top: 1.5rem;">
+    <div class="persona-avatar">💰</div>
+    <div>
+      <div class="persona-name">PRIYA SHARMA</div>
+      <div class="persona-role">The Upgrading Seller · Secondary Persona</div>
+      <div class="persona-tags">
+        <span class="tag">Age 28–40</span>
+        <span class="tag">Urban Professional</span>
+        <span class="tag red">Current RE Owner</span>
+        <span class="tag gold">Upgrading to New Model</span>
+        <span class="tag">Busy Schedule</span>
+      </div>
+      <p class="persona-quote">"I've had my Meteor 350 for 3 years and want to upgrade to the Himalayan. I just want someone to give me a fair price without me having to deal with 50 random calls and lowball offers."</p>
+
+      <div style="margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+        <div>
+          <div style="font-size: 0.72rem; font-family: 'DM Mono'; color: var(--re-red); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem;">Goals</div>
+          <ul style="list-style: none; font-size: 0.83rem; color: var(--muted); line-height: 1.8;">
+            <li>→ Get a fair price with no haggling</li>
+            <li>→ Minimal time investment on her part</li>
+            <li>→ Fast, reliable payment</li>
+            <li>→ Someone else handles all the paperwork</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size: 0.72rem; font-family: 'DM Mono'; color: var(--re-red); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem;">Frustrations</div>
+          <ul style="list-style: none; font-size: 0.83rem; color: var(--muted); line-height: 1.8;">
+            <li>→ Brokers underquote and take large cuts</li>
+            <li>→ Strangers visiting home feels unsafe</li>
+            <li>→ Payment delays and bounced cheques</li>
+            <li>→ RC transfer is confusing and slow</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- USER FLOWS -->
+<section id="flows" class="fade-in">
+  <div class="section-label">04 — User Flows</div>
+  <h2 class="section-title">JOURNEY MAPPING</h2>
+  <p class="section-body">I mapped both the Buy and Sell journeys step by step — identifying every decision point, drop-off risk, and opportunity to reduce friction. Below are the simplified user flows for each page I worked on.</p>
+
+  <div class="flow-wrap">
+    <div class="flow-tabs">
+      <button class="flow-tab active" onclick="showFlow('buy')">Buy Flow</button>
+      <button class="flow-tab" onclick="showFlow('sell')">Sell Flow</button>
+    </div>
+
+    <!-- BUY FLOW -->
+    <div class="flow-panel active" id="flow-buy">
+      <div class="flow-row">
+        <div class="flow-node">
+          <span class="flow-node-sub">Land on</span>
+          <span class="flow-node-title">Buy Page</span>
+          <span class="flow-node-desc">Select location</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <span class="flow-node-sub">Browse &amp; Filter</span>
+          <span class="flow-node-title">PLP Listing</span>
+          <span class="flow-node-desc">Model / Budget / Year</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <span class="flow-node-sub">Click bike card</span>
+          <span class="flow-node-title">Bike Detail</span>
+          <span class="flow-node-desc">Photos / specs / price</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight">
+          <span class="flow-node-sub">Schedule</span>
+          <span class="flow-node-title">Test Ride</span>
+          <span class="flow-node-desc">At home / showroom</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <span class="flow-node-sub">Confirm amount</span>
+          <span class="flow-node-title">Payment</span>
+          <span class="flow-node-desc">Part / full amount</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node gold">
+          <span class="flow-node-sub">Doorstep</span>
+          <span class="flow-node-title">Delivery</span>
+          <span class="flow-node-desc">RC + insurance transfer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SELL FLOW -->
+    <div class="flow-panel" id="flow-sell">
+      <div class="flow-row">
+        <div class="flow-node">
+          <span class="flow-node-sub">Enter details</span>
+          <span class="flow-node-title">Get Estimate</span>
+          <span class="flow-node-desc">Model / KM / Year / Owner</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight">
+          <span class="flow-node-sub">Instant</span>
+          <span class="flow-node-title">Price Range</span>
+          <span class="flow-node-desc">Fair estimate shown</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <span class="flow-node-sub">Fill bike details</span>
+          <span class="flow-node-title">Book Eval</span>
+          <span class="flow-node-desc">Reg. number + address</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <span class="flow-node-sub">Expert visits home</span>
+          <span class="flow-node-title">Doorstep</span>
+          <span class="flow-node-desc">Physical inspection</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node">
+          <span class="flow-node-sub">Accept / negotiate</span>
+          <span class="flow-node-title">Final Quote</span>
+          <span class="flow-node-desc">Transparent pricing</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node gold">
+          <span class="flow-node-sub">Within 24H</span>
+          <span class="flow-node-title">Payment</span>
+          <span class="flow-node-desc">UPI / NEFT / IMPS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+
+<!-- MOCKUPS -->
+<section id="mockups" class="fade-in">
+  <div class="section-label">05 — High-Fidelity Mockups</div>
+  <h2 class="section-title">THE FINAL UI</h2>
+  <p class="section-body">After validating the structure, I moved into high-fidelity design following Royal Enfield's brand system — dark backgrounds, the signature RE red (#CC2B2B), and a bold typographic voice. Both pages were built responsive for desktop and mobile.</p>
+
+  <!-- BUY PAGE MOCKUP -->
+  <div style="margin-top: 3rem;">
+    <div style="font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--re-red); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+      <span style="display:block; width:24px; height:1px; background: var(--re-red);"></span>
+      BUY Page — Mockup
+      <a href="https://www.royalenfield.com/in/en/reown/buy/rev/coords_28.4020$76.8260/cityNames_Delhi$New%20Delhi/" target="_blank" rel="noopener noreferrer" aria-label="Open Reown Buy page" style="color:var(--re-red);display:inline-flex;align-items:center;text-decoration:none;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M5 3H3.5C2.67 3 2 3.67 2 4.5V10.5C2 11.33 2.67 12 3.5 12H9.5C10.33 12 11 11.33 11 10.5V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 2H12V6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 8L12 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="buy-mockup-grid">
+      <div class="buy-mockup-frame"><img src="/Reown_buy_mob.jpeg" alt="Reown Buy page mobile mockup"></div>
+      <div class="buy-mockup-frame"><img src="/Reown_buy_web.jpeg" alt="Reown Buy page desktop mockup"></div>
+    </div>
+
+  </div>
+
+  <!-- SELL PAGE MOCKUP -->
+  <div style="margin-top: 4rem;">
+    <div style="font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--re-red); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+      <span style="display:block; width:24px; height:1px; background: var(--re-red);"></span>
+      SELL Page — Mockup
+      <a href="https://www.royalenfield.com/in/en/reown/sell/" target="_blank" rel="noopener noreferrer" aria-label="Open Reown Sell page" style="color:var(--re-red);display:inline-flex;align-items:center;text-decoration:none;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M5 3H3.5C2.67 3 2 3.67 2 4.5V10.5C2 11.33 2.67 12 3.5 12H9.5C10.33 12 11 11.33 11 10.5V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8 2H12V6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 8L12 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="buy-mockup-grid">
+      <div class="buy-mockup-frame"><img src="/reown_sale_mob.JPG" alt="Reown Sell page mobile mockup"></div>
+      <div class="buy-mockup-frame"><img src="/reown_sale_web.jpeg" alt="Reown Sell page desktop mockup"></div>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- SOLUTIONS -->
+<section id="solutions" class="fade-in">
+  <div class="section-label">06 — Solutions & Prioritization</div>
+  <h2 class="section-title">DESIGN DECISIONS</h2>
+  <p class="section-body">Each design decision was tied directly back to a user pain point. Below is how we prioritized solutions using an Impact vs. Effort framework.</p>
+
+  <div class="solution-list">
+    <div class="solution-item">
+      <div class="solution-num">01</div>
+      <div class="solution-content">
+        <h4>Location-aware PLP with real-time inventory</h4>
+        <p>Users immediately see bikes available in their city. GPS + city picker ensures relevant results from first load — no empty states.</p>
+        <span class="priority-badge prio-high">High Priority</span>
+      </div>
+    </div>
+    <div class="solution-item">
+      <div class="solution-num">02</div>
+      <div class="solution-content">
+        <h4>Instant price estimator on the Sell page</h4>
+        <p>Before users even scroll, they can get a real estimated price for their bike — 4 fields, no login required. Reduces commitment anxiety.</p>
+        <span class="priority-badge prio-high">High Priority</span>
+      </div>
+    </div>
+    <div class="solution-item">
+      <div class="solution-num">03</div>
+      <div class="solution-content">
+        <h4>Certified badge on every bike card</h4>
+        <p>The 200+ point certification status is visible on the card — not buried inside the detail page. Trust built at discovery, not just at consideration.</p>
+        <span class="priority-badge prio-high">High Priority</span>
+      </div>
+    </div>
+    <div class="solution-item">
+      <div class="solution-num">04</div>
+      <div class="solution-content">
+        <h4>Recently sold pricing on Sell page</h4>
+        <p>Real transactions with real prices shown alongside the calculator anchor expectations. This single element significantly reduced seller anxiety.</p>
+        <span class="priority-badge prio-high">High Priority</span>
+      </div>
+    </div>
+    <div class="solution-item">
+      <div class="solution-num">05</div>
+      <div class="solution-content">
+        <h4>Multi-param filter with count feedback</h4>
+        <p>Filters show inventory count per option — users can see how selective a filter is before applying it. Reduces zero-result frustration.</p>
+        <span class="priority-badge prio-med">Medium Priority</span>
+      </div>
+    </div>
+    <div class="solution-item">
+      <div class="solution-num">06</div>
+      <div class="solution-content">
+        <h4>Compare feature (up to 3 bikes)</h4>
+        <p>Users can shortlist and compare bikes side-by-side. Added as a secondary action — always visible on cards but never competing with the primary CTA.</p>
+        <span class="priority-badge prio-med">Medium Priority</span>
+      </div>
+    </div>
+    <div class="solution-item">
+      <div class="solution-num">07</div>
+      <div class="solution-content">
+        <h4>Create a Requirement (waitlist)</h4>
+        <p>For users who can't find their bike — a form to be notified when matching inventory arrives. Saves the user from leaving empty-handed.</p>
+        <span class="priority-badge prio-low">Lower Priority</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- METRICS -->
+<section id="metrics" class="fade-in">
+  <div class="section-label">07 — Metrics</div>
+  <h2 class="section-title">HOW WE MEASURE SUCCESS</h2>
+  <p class="section-body">Success for each page was defined clearly before development. These are the north-star metrics for the Buy and Sell experiences.</p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-num">CTR</div>
+      <div class="metric-label">Test Ride Click Rate<br>on PLP cards</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">Est.</div>
+      <div class="metric-label">Estimate completion<br>rate on Sell page</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">D2C</div>
+      <div class="metric-label">Discovery to Contact<br>conversion rate</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">7D</div>
+      <div class="metric-label">Return rate post<br>purchase (brand trust)</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">NPS</div>
+      <div class="metric-label">Net Promoter Score<br>across both journeys</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">Mob</div>
+      <div class="metric-label">Mobile vs Desktop<br>session split + parity</div>
+    </div>
+  </div>
+
+  <div class="quote-block" style="margin-top:2.5rem;">
+    The key insight from Reown's UX analytics was that mobile users dropped off disproportionately at the filter step on the Buy page. By redesigning mobile filters as swipeable bottom-sheet chips rather than a full-screen overlay, we reduced friction and improved PLP-to-detail navigation by a significant margin.
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- REFLECTION -->
+<section id="reflection" class="fade-in">
+  <div class="section-label">08 — Reflection</div>
+  <h2 class="section-title">LEARNINGS</h2>
+  <p class="section-body">Working on a product at the intersection of brand legacy and marketplace trust taught me a lot about designing for emotionally charged decisions — buying a motorcycle isn't just a transaction, it's an aspiration.</p>
+
+  <div class="reflection-grid">
+    <div class="reflection-card">
+      <h4>What Worked</h4>
+      <ul>
+        <li>Leading with the instant estimate on Sell — zero-friction value before commitment</li>
+        <li>Card-level certification badge — trust at discovery, not just at checkout</li>
+        <li>Real sold prices next to the calculator — expectation anchoring works</li>
+        <li>Mobile-first card layout — horizontal bike cards optimised for thumb scrolling</li>
+        <li>Location as entry point — showing relevant local inventory immediately</li>
+      </ul>
+    </div>
+    <div class="reflection-card">
+      <h4>What I'd Improve</h4>
+      <ul>
+        <li>Add a bike condition score / visual summary card — current UI buries condition info</li>
+        <li>Persistent compare drawer on mobile — disappears too easily in current design</li>
+        <li>The Sell flow's OTP step felt abrupt — better progressive disclosure needed</li>
+        <li>Empty state for zero filter results was too passive — smarter suggestion prompts needed</li>
+        <li>Wishlist needs a proper management flow, currently orphaned after the icon</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="full-sep"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RE<span>OWN</span></div>
+  <div class="footer-sub">A Royal Enfield Product · UX/UI Design Case Study</div>
+  <div class="footer-line"></div>
+  <div class="footer-copy">Designed with <span>♥</span> · Case study created for portfolio purposes</div>
+</footer>
+
+<script>
+  // Tab switching
+  function showFlow(type) {
+    document.querySelectorAll('.flow-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.flow-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('flow-' + type).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
